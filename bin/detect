@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Check for the presence of a specific file or configuration setting
+if [ -f "app.py" ]; then
+    echo "TwitchDownloaderCLI detected"
+    exit 0
+else
+    echo "No TwitchDownloaderCLI detected"
+    exit 1
+fi
