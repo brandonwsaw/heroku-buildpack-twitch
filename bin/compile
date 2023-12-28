@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Download and install TwitchDownloaderCLI
-curl -L -o TwitchDownloaderCLI.zip https://github.com/lay295/TwitchDownloader/releases/download/v1.39/TwitchDownloaderCLI.zip
+curl -L -o TwitchDownloaderCLI.zip https://github.com/lay295/TwitchDownloader/releases/download/1.53.6/TwitchDownloaderCLI-1.53.6-Linux-x64.zip
 unzip TwitchDownloaderCLI.zip -d /app/.heroku
 chmod +x /app/.heroku/TwitchDownloaderCLI
 
 # Download and install FFmpeg
-curl -L -o ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+curl -L -o ffmpeg.tar.xz https://ffmpeg.org/releases/ffmpeg-6.1.tar.xz
 tar -xf ffmpeg.tar.xz -C /app/.heroku --strip-components 1
 chmod +x /app/.heroku/ffmpeg
