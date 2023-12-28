@@ -7,6 +7,7 @@ chmod +x /app/.heroku/TwitchDownloaderCLI
 
 # Download and install FFmpeg
 curl -L -o ffmpeg.tar.xz https://ffmpeg.org/releases/ffmpeg-6.1.tar.xz
-mkdir /app/.heroku/ffmpeg
-tar -xf ffmpeg.tar.xz -C /app/.heroku/ffmpeg --strip-components 1
-chmod +x /app/.heroku/ffmpeg/ffmpeg
+tar -xf ffmpeg.tar.xz -C /app/.heroku
+FFMPEG_DIR=$(find /app/.heroku -type d -name "ffmpeg-*")
+mv $FFMPEG_DIR/ffmpeg /app/.heroku/ffmpeg
+chmod +x /app/.heroku/ffmpeg
