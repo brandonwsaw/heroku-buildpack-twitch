@@ -1,7 +1,42 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Download and install TwitchDownloaderCLI
-curl -L -o TwitchDownloaderCLI.zip https://github.com/lay295/TwitchDownloader/releases/download/1.53.6/TwitchDownloaderCLI-1.53.6-Linux-x64.zip
-unzip TwitchDownloaderCLI.zip -d /app/.heroku
-mv /app/.heroku/TwitchDownloaderCLI /app/.heroku/bin/
-chmod +x /app/bin/TwitchDownloaderCLI
+header() {
+  echo "" || true
+  echo "-----> $*" || true
+}
+
+BUILD_DIR=${1:-}
+VENDOR_DIR="vendor"
+TWITCHDOWNLOADERCLI_ARCHIVE_NAME="TwitchDownloaderCLI.zip"
+
+header "Installing TwitchDownloaderCLI"
+
+cd $BUILD_DIR
+mkdir -p $VENDOR_DIR
+cd $VENDOR_DIR
+
+TWITCHDOWNLOADERCLI_DOWNLOAD_URL="https://github.com/lay295/TwitchDownloader/releases/download/1.53.6/TwitchDownloaderCLI-1.53.6-Linux-x64.zip"
+
+header "Downloading $TWITCHDOWNLOADERCLI_DOWNLOAD_URL"
+
+code=$(curl "$TWITCHDOWNLOADERCLI_DOWNLOAD_URL" -L --silent --fail --retry 5 --retry-max-time 15 -o ./$TWITCHDOWNLOADERCLI_ARCHIVE_NAME --write-out "%{http_code}")
+
+if [ "$code" != "200" ]; then
+  header "Unable to download TwitchDownloaderCLI: $code" && exit 1
+fi
+
+header "Unpacking the archive"
+
+unzip "./$TWITCHDOWNLOADERCLI_ARCHIVE_NAME"
+
+if [ "$?" != "0" ]; then
+  header "Failed to unpack" && exit 1
+fi
+
+rm $TWITCHDOWNLOADERCLI_ARCHIVE_NAME
+
+PROFILE_PATH="$BUILD_DIR/.profile.d/TwitchDownloaderCLI.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
+
+header "Installation successful"
