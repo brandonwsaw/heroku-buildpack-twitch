@@ -35,6 +35,9 @@ fi
 
 rm $TWITCHDOWNLOADERCLI_ARCHIVE_NAME
 
+# Add execute permissions
+chmod +x TwitchDownloaderCLI
+
 PROFILE_PATH="$BUILD_DIR/.profile.d/TwitchDownloaderCLI.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="$PATH:${HOME}/vendor"' >> $PROFILE_PATH
