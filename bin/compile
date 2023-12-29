@@ -3,5 +3,5 @@
 # Download and install TwitchDownloaderCLI
 curl -L -o TwitchDownloaderCLI.zip https://github.com/lay295/TwitchDownloader/releases/download/1.53.6/TwitchDownloaderCLI-1.53.6-Linux-x64.zip
 unzip TwitchDownloaderCLI.zip -d /app/.heroku
-mv /app/.heroku/TwitchDownloaderCLI /app/bin/
+mv /app/.heroku/TwitchDownloaderCLI /app/.heroku/bin/
 chmod +x /app/bin/TwitchDownloaderCLI
